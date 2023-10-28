@@ -1,0 +1,18 @@
+# Ignorar directorio vendor
+/vendor/
+
+#ignorar node_modules
+/node_modules/
+
+# Ignorar archivo composer.lock
+composer.lock
+
+#ignorar config
+config.php
+
+#ignorar info
+info.php
+
+#ignorar doc e img
+/assets/img/user/
+/assets/img/posts/
