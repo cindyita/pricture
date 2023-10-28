@@ -1,0 +1,99 @@
+/* Color variables */
+:root {
+    --pink:#e351c5;
+    --green: #29cf98;
+    --lightGreen: #d0ffef;
+    --purple: #b413e2;
+    --lightPink:#f6f1f8;
+    --radius: 1.5rem;
+}
+
+/*-------------------------*/
+/*-------FONT IMAGE--------*/
+
+body {
+    background-image: url("../img/system/font.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*-------------------------*/
+/*-----------FONTS---------*/
+
+@font-face {
+  font-family: 'Varela';
+  src: url('../fonts/VarelaRound-Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: 'Varela', sans-serif;
+    transition: 0.3s ease;
+}
+
+/*-------------------------*/
+/*---------SCROLLBAR-------*/
+
+*::-webkit-scrollbar {
+    width: 7px;
+}
+*::-webkit-scrollbar-track {
+    background: #caabc5;
+}
+*::-webkit-scrollbar-thumb {
+    background: var(--fontRGB);
+    border-radius: 5px;
+    border:1px solid white;
+}
+* {
+    scrollbar-width: thin;
+}
+* {
+    scrollbar-color: #d4bdd2 #f1f1f1;
+}
+
+/*-------------------------*/
+/*----------BUTTONS--------*/
+
+.button-primary {
+    background-color: var(--lightGreen);
+    border-radius: var(--radius);
+    position: relative;
+    padding: 10px 15px;
+    border:0;
+    z-index: 0;
+    font-weight: 600;
+    font-size: 14pt;
+    color: var(--pink);
+}
+.button-primary i {
+    font-size: 14pt;
+    font-weight: 600;
+}
+.button-primary span {
+    background: linear-gradient(0deg, #c96bff 0%, #f92ebd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.button-primary::before {
+  content: "";
+  position: absolute;
+  top:0;
+  right:0;
+  z-index: -1;
+  inset: 0;
+  padding: 3px;
+  border-radius: var(--radius);
+  background: linear-gradient(0deg, #c96bff 0%, #f92ebd 100%);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+          mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.button-primary:hover {
+    background-color: var(--lightPink);
+}

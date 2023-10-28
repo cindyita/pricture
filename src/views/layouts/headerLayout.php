@@ -11,35 +11,19 @@
     <title>Pricture | Your pripara photo space</title>
     <link rel="shortcut icon" href="./assets/img/system/favicon.png" type="image/PNG">
 
-    <style>
-        .loading {
-            display: none;
-            width: 100%;
-            height: 100%;
-            z-index: 999;
-            background-color: var(--font);
-            position: absolute;
-            top:0;
-            left:0;
-        }
-        .loading .content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
-
     <!-------------required------------>
+
+    <link href="./assets/library/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="./assets/library/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="./assets/library/fontawesome/css/solid.min.css" rel="stylesheet">
+
+    <script src="./assets/library/jquery/jquery-3.7.0.min.js"></script>
+
+    <link href="./assets/library/bootstrap5/bootstrap.min.css" rel="stylesheet">
+
+    <!-------------/required------------>
+
     <link href="./assets/css/app.css?version=<?php echo VERSION; ?>" rel="stylesheet">
-
-    <link href="./assets/required/fontawesome/css/fontawesome.min.css?version=<?php echo VERSION; ?>" rel="stylesheet">
-    <link href="./assets/required/fontawesome/css/brands.min.css?version=<?php echo VERSION; ?>" rel="stylesheet">
-    <link href="./assets/required/fontawesome/css/solid.min.css?version=<?php echo VERSION; ?>" rel="stylesheet">
-
-    <script src="./assets/required/jquery/jquery-3.7.0.min.js?version=<?php echo VERSION; ?>"></script>
-
     <link href="./assets/css/theme.css?version=<?php echo VERSION; ?>" rel="stylesheet">
 
     <?php 
@@ -52,4 +36,3 @@
     <!--------------------------------->
 </head>
 <body>
-
