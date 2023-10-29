@@ -1,15 +1,26 @@
-<?php
-
+<?php 
 class QueryModel {
     private $db;
-
-    public function __construct() {
+    private $data;
+    public function __construct(){
+        $this->data = array();
         $host = DB_HOST;
         $dbname = DB_NAME;
         $user = DB_USER;
         $pass = DB_PASS;
         $this->db = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $user, $pass);
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    private function executeQuery($query, $params) {
+        $stmt = $this->db->prepare($query);
+        
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+
+        $stmt->execute();
+        return $stmt;
     }
 
     public function query($query, $params = array()) {
@@ -21,53 +32,107 @@ class QueryModel {
             return $e;
         }
     }
+        
+    public function insert($table, $data) {
+        $sanitizedData = $this->sanitizeData($data);
 
-    public function select($table, $condition) {
-        $query = "SELECT * FROM $table WHERE $condition";
-        return $this->executeQuery($query);
+        $columns = implode(", ", array_keys($sanitizedData));
+        $placeholders = ":" . implode(", :", array_keys($sanitizedData));
+
+        $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($sanitizedData);
+            return 1;
+        } catch (PDOException $e) {
+            return 0;
+        }
     }
 
-    public function insert($table, $data) {
-        $columns = implode(', ', array_keys($data));
-        $placeholders = ':' . implode(', :', array_keys($data));
-        $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-        return $this->executeQuery($query, $data);
+    public function select($table, $condition, $columns = null) {
+        if($columns){
+            $query = "SELECT $columns FROM $table WHERE $condition";    
+        }else{
+            $query = "SELECT * FROM $table WHERE $condition";    
+        }
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $this->data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->data = array();
+        }
+        
+        return $this->data;
+    }
+
+    public function selectUnique($table, $condition, $columns = null) {
+        if($columns){
+            $query = "SELECT $columns FROM $table WHERE $condition";    
+        }else{
+            $query = "SELECT * FROM $table WHERE $condition";    
+        }
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $this->data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->data = array();
+        }
+        if(isset($this->data[0])){
+            return $this->data[0];
+        }else{
+            return 0;
+        }
     }
 
     public function update($table, $data, $condition) {
+        $sanitizedData = $this->sanitizeData($data);
+
         $setValues = [];
-        foreach ($data as $key => $value) {
-            $setValues[] = "$key = :$key";
+        foreach ($sanitizedData as $key => $value) {
+            $setValues[] = $key . " = :" . $key;
         }
-        $setClause = implode(', ', $setValues);
+        $setClause = implode(", ", $setValues);
+
         $query = "UPDATE $table SET $setClause WHERE $condition";
-        return $this->executeQuery($query, $data);
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute($sanitizedData);
+            return 1;
+        } catch (PDOException $e) {
+            return 0;
+        }
     }
 
     public function delete($table, $condition) {
         $query = "DELETE FROM $table WHERE $condition";
-        return $this->executeQuery($query);
-    }
-
-    public function lastId($table) {
-        $query = "SELECT id FROM $table ORDER BY id DESC LIMIT 1";
-        $result = $this->executeQuery($query);
-        if ($result) {
-            $row = $result->fetch(PDO::FETCH_ASSOC);
-            return $row['id'];
-        }
-        return null;
-    }
-
-    private function executeQuery($query, $params = []) {
+        
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute($params);
-            return $stmt;
+            $stmt->execute();
+            return 1;
         } catch (PDOException $e) {
-            error_log("Database Error: " . $e->getMessage());
-            return false;
+            return 0;
         }
+    }
+
+    public function lastid($table){
+        $query = "SELECT id FROM $table ORDER BY id DESC LIMIT 1";
+        
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            $this->data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $this->data = array();
+        }
+        
+        return $this->data[0]['id'];
     }
 
     private function sanitizeData($data) {
@@ -83,4 +148,6 @@ class QueryModel {
 
         return $sanitizedData;
     }
+
+
 }

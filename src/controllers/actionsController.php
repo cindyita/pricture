@@ -9,6 +9,15 @@ switch ($action) {
     case 'login':
         login();
     break;
+    case 'checkusername':
+        checkusername();
+    break;
+    case 'checkemail':
+        checkemail();
+    break;
+    case 'signup':
+        signup();
+    break;
     default:
         echo json_encode("No action defined: ".$action);
     break;
@@ -34,22 +43,17 @@ function login(){
             $db = new QueryModel();
             $username = $data['username'];
             
-            $user = $db->query("SELECT u.*, r.id as rolid, r.name as rolname, r.status as rolstatus FROM SYS_USER u JOIN SYS_ROLES r ON u.id_rol = r.id WHERE username = :username", [':username' => $username]);
+            $user = $db->query("SELECT u.*, r.name as rolname, r.status as rolstatus FROM SYS_USER u JOIN SYS_ROL r ON u.id_rol = r.id WHERE username = :username", [':username' => $username]);
             $user = $user[0];
 
-            if ($user && isset($user) && isset($user['password']) && $user['password'] == md5($data['pswd'])) {
-
-                $permissions_screen = $db->query("SELECT s.href FROM REG_PERMISSIONS_SCREENS p JOIN SYS_PERMISSIONS_SCREENS s ON p.id_screen = s.id WHERE p.id_rol = :id_rol", [':id_rol' => $user['rolid']]);
+            if ($user && isset($user) && isset($user['password']) && $user['password'] == md5($data['pass'])) {
 
                 foreach ($user as $key => $value) {
                     if($key != "password"){
                         $_SESSION['userdata'][$key] = $value;
                     }
                 }
-
-                foreach ($permissions_screen as $key => $value) {
-                    $_SESSION['screens'][$key] = $value['href'];
-                }
+                $_SESSION['status_login_pricture'] = 1;
 
                 echo 1;
             } else {
@@ -61,6 +65,61 @@ function login(){
         }--*/
         
     }catch(exception $e){
+        echo json_encode('error: '.$e->getMessage());
+    }
+}
+
+function checkusername(){
+    $db = new QueryModel();
+    $data = getData();
+    $username = $data['input'];
+    $value = $db->selectUnique("SYS_USER", "username = '".$username."'","username");
+    if($value){
+        echo 1;
+    }else{
+        echo 0;
+    }
+}
+
+function checkemail(){
+    $db = new QueryModel();
+    $data = getData();
+    $email = $data['input'];
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo 2;
+        die();
+    }
+
+    list($user, $domain) = explode('@', $email);
+    if(!checkdnsrr($domain, 'MX')){
+        echo 2;
+        die();
+    }
+
+    $value = $db->selectUnique("SYS_USER", "email = '".$email."'","email");
+    if($value){
+        echo 1;
+    }else{
+        echo 0;
+    }
+}
+
+function signup() {
+    $data = getData();
+    try {
+        $db = new QueryModel();
+        $pass = md5($data['pass']);
+        $insertData = [
+            'email' => $data['email'],
+            'username' => $data['username'],
+            'password' => $pass
+        ];
+
+        $register = $db->insert('SYS_USER', $insertData);
+        echo json_encode($register);
+
+    } catch (Exception $e) {
         echo json_encode('error: '.$e->getMessage());
     }
 }

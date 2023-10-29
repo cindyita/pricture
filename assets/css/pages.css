@@ -1,0 +1,29 @@
+/*----------LOGIN--------*/
+.main-login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login {
+    text-align: center;
+    width: 25%;
+}
+.login .logo img {
+    width: 160px;
+}
+#error-login,
+#success-login {
+    display: none;
+}
+
+@media (max-width: 1200px){ 
+    .main-login {
+        align-items: flex-start;
+        padding: 50px 0 50px;
+    }
+    .login {
+        width: 90%;
+    }
+}

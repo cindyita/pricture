@@ -1,1 +1,5 @@
-<p>Home</p>
+<div class="main">
+
+    <p>Home</p>
+    
+</div>

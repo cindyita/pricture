@@ -25,25 +25,32 @@ if(isset($_GET['page'])){
         case 'login':
             $pages->updateScripts(["./assets/js/pages/login.js"]);
         break;
+        case 'signup':
+            $pages->updateScripts(["./assets/js/pages/signup.js"]);
+        break;
         case 'home':
             $pages->updateScripts(["./assets/js/pages/home.js"]);
+            $pages->menuHTML();
         break;
     }
 
+}else{
+    $pages->menuHTML();
 }
 
-$pages->menuHTML();
 /*-------------------------------------*/
 
 $router->add('/', 'PagesController@home');
 
-$router->add('/home', 'PagesController@redirecthome');
+$router->add('/home', 'PagesController@home');
 
 $router->add('/login', 'PagesController@login');
 
+$router->add('/signup', 'PagesController@signup');
+
 $router->add('/logout','PagesController@logout');
 
-$router->add('/profile', 'PagesController@profile');
+$router->add('/myprofile', 'PagesController@myprofile');
 
 $router->run();
 

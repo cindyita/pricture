@@ -28,7 +28,6 @@ body {
 
 * {
     font-family: 'Varela', sans-serif;
-    transition: 0.3s ease;
 }
 
 /*-------------------------*/
@@ -52,10 +51,53 @@ body {
     scrollbar-color: #d4bdd2 #f1f1f1;
 }
 
+/*------------------------------------*/
+/*--------------BS STYLES-------------*/
+
+.dropdown-menu {
+    border: 2px solid var(--pink);
+    text-align: center;
+}
+.dropdown-item {
+    color: var(--pink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.dropdown-item:hover {
+    background-color: var(--lightPink);
+    color: var(--pink);
+}
+.dropdown-divider{
+    border-top: 1px solid var(--pink);
+}
+
+/*-------------------------*/
+/*-----------TEXT---------*/
+
+h2,h4 {
+    color:var(--pink);
+    font-weight: 600;
+}
+label {
+    color: var(--pink);
+}
+.txt-secondary {
+    color: var(--green);
+    font-size: 10pt;
+}
+a {
+    color: var(--purple);
+}
+a:hover {
+    color: var(--green);
+}
+
 /*-------------------------*/
 /*----------BUTTONS--------*/
 
-.button-primary {
+.button-primary,
+.button-secondary {
     background-color: var(--lightGreen);
     border-radius: var(--radius);
     position: relative;
@@ -65,17 +107,24 @@ body {
     font-weight: 600;
     font-size: 14pt;
     color: var(--pink);
+    transition: 0.3s ease;
 }
-.button-primary i {
+.button-secondary {
+    background-color: var(--lightPink);
+}
+.button-primary i,
+.button-secondary i {
     font-size: 14pt;
     font-weight: 600;
 }
-.button-primary span {
+.button-primary span,
+.button-secondary span {
     background: linear-gradient(0deg, #c96bff 0%, #f92ebd 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.button-primary::before {
+.button-primary::before,
+.button-secondary:before {
   content: "";
   position: absolute;
   top:0;
@@ -97,3 +146,88 @@ body {
 .button-primary:hover {
     background-color: var(--lightPink);
 }
+.button-secondary:hover {
+    background-color: white;
+}
+
+.button-display {
+    border-radius: var(--radius);
+    position: relative;
+    border: 3px solid var(--pink);
+    z-index: 0;
+    font-weight: 600;
+    font-size: 14pt;
+    transition: 0.3s ease;
+    padding: 8px 0;
+}
+.button-display span {
+    background: linear-gradient(0deg, var(--lightPink) 0%, var(--pink) 100%);
+    border: 2px solid white;
+    padding: 8px 15px;
+    border-radius: var(--radius);
+    text-shadow: 1px 1px 3px var(--pink);
+    color: white;
+    transition: 0.3s ease;
+}
+.button-display:hover span{
+    background: white;
+    color: var(--pink);
+    text-shadow: 1px 1px 3px var(--lightPink);
+}
+
+@media (max-width: 550px){ 
+    .button-primary,
+    .button-secondary {
+        padding: 8px 13px;
+        font-size: 12pt;
+    }
+}
+
+/*-------------------------*/
+/*-----------BOXES---------*/
+
+.pink-box {
+    background-color: var(--lightPink);
+    border: 3px solid var(--pink);
+    border-radius: var(--radius);
+    padding: 50px 40px;
+}
+
+.alert-danger {
+    border: 2px solid red;
+    border-radius: var(--radius);
+    color: darkred;
+}
+.alert-danger strong {
+    color: red;
+}
+.alert-success {
+    border: 2px solid var(--green);
+    border-radius: var(--radius);
+    color: var(--green);
+    background-color: var(--lightGreen);
+}
+.alert-success strong {
+    color: var(--green);
+}
+
+/*-------------------------*/
+/*---------BS FORM---------*/
+
+.form-control {
+    border: 1px solid var(--green);
+    border-radius: var(--radius);
+    color: var(--pink);
+}
+.form-control:focus {
+    border: 1px solid var(--pink);
+}
+.form-check-input,
+.form-check-input:focus {
+    border-color: var(--pink);
+}
+.form-check-input:checked {
+    background-color: var(--pink);
+    border-color: var(--pink);
+}
+

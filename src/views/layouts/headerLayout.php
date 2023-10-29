@@ -25,6 +25,7 @@
 
     <link href="./assets/css/app.css?version=<?php echo VERSION; ?>" rel="stylesheet">
     <link href="./assets/css/theme.css?version=<?php echo VERSION; ?>" rel="stylesheet">
+    <link href="./assets/css/pages.css?version=<?php echo VERSION; ?>" rel="stylesheet">
 
     <?php 
         if($styles){

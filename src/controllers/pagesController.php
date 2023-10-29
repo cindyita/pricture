@@ -36,11 +36,11 @@ class PagesController
      * Revisar si hay una sesión
      */
     public static function checkSession() {
-        $rejectPages = array('profile');
+        $rejectPages = array('myprofile','myposts','myfriends','settings','logout');
         $currentPage = basename($_SERVER['PHP_SELF']);
         if (in_array($currentPage, $rejectPages)) {
 
-            if (!isset($_SESSION['user_id'])) {
+            if (!isset($_SESSION['status_login_pricture'])) {
 
                 header('Location: login');
                 exit();
@@ -62,6 +62,19 @@ class PagesController
     }
 
     /**
+     * Check and shows sign up page
+     */
+    public static function signup() {   
+        if (isset($_SESSION['user_id'])) {
+
+            header('Location: home');
+            exit();
+        }else{
+            require_once "./src/views/pages/signup.php";
+        }
+    }
+
+    /**
      * Logout session
      */
     public static function logout() {   
@@ -70,7 +83,7 @@ class PagesController
             setcookie(session_name(), '', time() - 42000, '/');
         }
         session_destroy();
-        header('Location: login');
+        header('Location: home');
         exit();
     }
 
@@ -90,13 +103,6 @@ class PagesController
     }
 
     /**
-     * Redirect to home
-     */
-    public static function redirecthome() {
-        header('Location: /');
-    }
-
-    /**
      * Shows home
      */
     public static function home() {
@@ -107,7 +113,7 @@ class PagesController
     /**
      * Shows profile page
      */
-    public static function profile() {
+    public static function myprofile() {
         self::checkSession();
         $db = new QueryModel();
         if(isset($_GET['id'])){
@@ -116,7 +122,7 @@ class PagesController
             $user = $db->query("SELECT u.*,r.name rol FROM SYS_USER u LEFT JOIN SYS_ROLES r ON u.id_rol = r.id WHERE u.id = :id",[":id"=>$id]);
             if($user){
                 $user = $user[0];
-                require_once "./src/views/pages/profile.php";
+                require_once "./src/views/pages/myprofile.php";
             }else{
                 echo "Invalid link";
             }
