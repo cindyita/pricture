@@ -53,6 +53,10 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
+    <!-----------ReCaptcha------------>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-----------/ReCaptcha------------>
+
     <!-------------/required------------>
 
     <link href="./assets/css/app.css?version=<?php echo VERSION; ?>" rel="stylesheet">
@@ -76,4 +80,8 @@
             <div class="spinner-border"></div>
         </div>
     </div>
+</div>
+
+<div class="superior-banner">
+    <span>This is a development version and many features are still missing. Please, if you find a bug or have a suggestion, <a href="contact">write to us.</a></span>
 </div>

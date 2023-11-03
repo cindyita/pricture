@@ -49,7 +49,7 @@ $(document).ready(function () {
                     setTimeout(function() {
                         window.location.href = 'login';
                     }, 1000);
-                } else if (res == 2) {
+                } else if (res == 6) {
                     $('#error-login span').html("The captcha is invalid. Refresh the page and try again");
                     $('#error-login').fadeIn();
                 } else {

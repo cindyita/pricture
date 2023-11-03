@@ -61,6 +61,10 @@ if(isset($_GET['page'])){
         case 'cookies':
             $pages->menuHTML();
         break;
+        case 'contact':
+            $pages->updateScripts(["./assets/js/pages/contact.js"]);
+            $pages->menuHTML();
+        break;
     }
 
 }else{
@@ -94,6 +98,8 @@ $router->add('/termsandconditions', 'PagesController@termsandconditions');
 $router->add('/privacypolicy', 'PagesController@privacypolicy');
 
 $router->add('/cookies', 'PagesController@useofcookies');
+
+$router->add('/contact', 'PagesController@contact');
 
 $router->run();
 

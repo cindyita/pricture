@@ -32,7 +32,8 @@
                 <div class="txt-secondary py-2 pb-4 d-flex flex-column">
                     <a href="login"><span>I already have an account</span></a>
                 </div>
-                <button type="submit" class="button-primary">Sign up</button>
+                <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE; ?>"></div>
+                <button type="submit" class="button-primary mt-2">Sign up</button>
             </form>
         </div>
     </div>

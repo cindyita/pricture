@@ -1,4 +1,5 @@
 <?php
+
 function formatDate($inputDate) {
     $timestamp = strtotime($inputDate);
     return date('d-m-Y', $timestamp);
@@ -14,4 +15,6 @@ function reducirTexto($texto, $longitudMaxima) {
 
     return $textoReducido;
 }
+
+
 ?>

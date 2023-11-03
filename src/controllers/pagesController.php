@@ -229,6 +229,14 @@ class PagesController
     }
 
     /**
+     * Shows contact page
+     */
+    public static function contact() {
+        self::checkSession();
+        require_once "./src/views/pages/contact.php";
+    }
+
+    /**
      * Muestra la página de error 404 (página no encontrada).
      */
     public static function error404() {

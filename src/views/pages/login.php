@@ -27,7 +27,8 @@
                     <!-- <a href=""><span>I forgot the password</span></a> -->
                     <a href="signup"><span>I don't have an account</span></a>
                 </div>
-                <button type="submit" class="button-primary">Login</button>
+                <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE; ?>"></div>
+                <button type="submit" class="mt-2 button-primary">Login</button>
             </form>
         </div>
     </div>

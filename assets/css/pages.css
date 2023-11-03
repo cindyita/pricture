@@ -286,3 +286,13 @@
         width: 100%;
     }
 }
+/*----------------------*/     
+.contact-form {
+    width: 50%;
+}
+
+@media (max-width: 800px){
+    .contact-form {
+        width: 100%;
+    }
+}

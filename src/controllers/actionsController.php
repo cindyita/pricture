@@ -51,6 +51,9 @@ switch ($action) {
     case 'updatePosts':
         updatePosts();
     break;
+    case 'sendContactForm':
+        sendContactForm();
+    break;
     default:
         echo json_encode("No action defined: ".$action);
     break;
@@ -64,14 +67,14 @@ function login(){
     $data = getData();
 
     try{
-        /*-ReCaptcha-----
+        /*-ReCaptcha----------*/
         $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify'; 
         $recaptcha_secret = RECAPTCHA_SECRET; 
         $recaptcha_response = $data['g-recaptcha-response']; 
         $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response); 
         $recaptcha = json_decode($recaptcha); 
 
-        if($recaptcha->success == true){-----*/
+        if($recaptcha->success == true){
 
             $db = new QueryModel();
             $username = $data['username'];
@@ -93,10 +96,10 @@ function login(){
             } else {
                 echo 0;
             }
-        /*-----
+        /*-------*/
         } else {
             echo 2;
-        }--*/
+        }
         
     }catch(exception $e){
         echo json_encode('error: '.$e->getMessage());
@@ -142,16 +145,34 @@ function checkemail(){
 function signup() {
     $data = getData();
     try {
-        $db = new QueryModel();
-        $pass = md5($data['pass']);
-        $insertData = [
-            'email' => $data['email'],
-            'username' => $data['username'],
-            'password' => $pass
-        ];
+        /*-ReCaptcha----------*/
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify'; 
+        $recaptcha_secret = RECAPTCHA_SECRET; 
+        $recaptcha_response = $data['g-recaptcha-response']; 
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response); 
+        $recaptcha = json_decode($recaptcha); 
 
-        $register = $db->insert('SYS_USER', $insertData);
-        echo json_encode($register);
+        if($recaptcha->success == true){
+
+            $db = new QueryModel();
+            $pass = md5($data['pass']);
+            $insertData = [
+                'email' => $data['email'],
+                'username' => $data['username'],
+                'password' => $pass
+            ];
+
+            $register = $db->insert('SYS_USER', $insertData);
+
+            if($register){
+                sendEmailSMTP("contact@pricture.theblux.com", $data['name'], $data['email'], $data['username'],"Thank you for registering on Pricture", '', ["host"=>"ngx341.inmotionhosting.com","username"=>"contact@pricture.theblux.com","password"=>"-K7prPb9#8=}","port"=>"465"],["title"=>"Thank you for registering on the page","content"=>"We hope that your stay is to your liking, remember that we are still in the development and testing phase. Stop by from time to time to see what's new on the page and if you have any problems with your account, send us an email."]);
+            }
+            echo json_encode($register);
+            
+        } else {
+            echo 6;
+        }
+
 
     } catch (Exception $e) {
         echo json_encode('error: '.$e->getMessage());
@@ -575,4 +596,36 @@ function reducirTexto($texto, $longitudMaxima) {
     }
 
     return $textoReducido;
+}
+
+function sendContactForm(){
+    $data = getData();
+
+    /*-ReCaptcha----------*/
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify'; 
+    $recaptcha_secret = RECAPTCHA_SECRET; 
+    $recaptcha_response = $data['g-recaptcha-response']; 
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response); 
+    $recaptcha = json_decode($recaptcha);
+
+    if ($recaptcha->success == true) {
+
+        $db = new QueryModel();
+
+        require("../resources/email.php");
+
+        $para = "contact@pricture.theblux.com";
+        $asunto = "New " . $data['subject'] . " From: " . $data['name'];
+        $user = "";
+
+        if (isset($_SESSION['status_login_pricture'])) {
+            $user = $_SESSION['userdata']['id'];
+        }
+        $mensaje = "<strong>New contact form message</strong><br><br> User id: " . $user . "<br> Email: " . $data['email'] . "<br> Message:<br> " . $data['comment'];
+
+        sendEmailSMTP($para, $data['name'], $para, "pricture admin", $data['subject'], $mensaje, ["host" => "ngx341.inmotionhosting.com", "username" => "contact@pricture.theblux.com", "password" => "-K7prPb9#8=}", "port" => "465"]);
+    }else{
+        echo 6;
+    }
+
 }

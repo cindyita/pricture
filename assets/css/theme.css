@@ -501,6 +501,16 @@ a:hover {
     cursor: pointer;
 }
 
+.superior-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--fontGreen);
+    color: var(--pink);
+    width: 100%;
+    height: 50px;
+}
+
 @media (max-width: 1500px) {
     .alert-superior {
         right:37%;

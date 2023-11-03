@@ -10,6 +10,7 @@
         <a href="termsandconditions">Terms and Conditions</a>
         <a href="privacypolicy">Privacy policy</a>
         <a href="cookies">Use of cookies</a>
+        <a href="contact">Contact</a>
     </span>
     <span class="text-secondary mt-1">Beta v<?php echo VERSION; ?></span>
 </footer>
