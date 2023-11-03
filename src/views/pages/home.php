@@ -10,7 +10,7 @@
                 <div  class="d-flex w-100 justify-content-between align-items-center flex-column flex-sm-row">
                     <div class="d-flex gap-2 align-items-center">
                         <div class="user-post">
-                            <img src="./assets/img/<?php echo $value['img_profile'] ? 'user/img-profile/'.$value['img_profile'] : 'system/defaultprofile.jpg'; ?>" alt="image profile">
+                            <img src="./assets/img/<?php echo $value['img_profile'] ? 'user/img-profile/'.$value['img_profile'] : 'system/defaultprofile.jpg'; ?>" alt="image profile" onerror="this.src = './assets/img/system/defaultprofile.jpg'">
                         </div>
                         <span class="user-name"><a href="user?id=<?php echo $value['id_user']; ?>"><?php echo $value['username']; ?></a></span>
                     </div>
@@ -31,7 +31,7 @@
                 <div>
                     <a href="post?id=<?php echo $value['id']; ?>">
                         <div class="img-post">
-                            <img src="./assets/img/<?php echo $value['img'] ? 'posts/'.$value['img'] : 'system/defaultimg.jpg'; ?>" alt="image">
+                            <img src="./assets/img/<?php echo $value['img'] ? 'posts/'.$value['img'] : 'system/defaultimg.jpg'; ?>" alt="image" onerror="this.src = './assets/img/system/defaultimg.jpg'">
                         </div>
                     </a>
                 </div>
