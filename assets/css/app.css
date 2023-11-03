@@ -38,6 +38,13 @@ a:focus {
 
 .main {
     padding: 3% 5%;
+    min-height: 77.6vh;
+}
+
+@media (max-width: 550px){
+    .main {
+        padding: 2%;
+    }
 }
 
 /*------------------------------------*/
@@ -78,3 +85,30 @@ header .menu-user img {
 }
 
 /*------------------------------------*/
+/*--------------Footer----------------*/
+
+footer {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--fontPink);
+    margin-top: 100px;
+    color: var(--pink);
+    text-align: center;
+}
+footer span {
+    display: flex;
+    gap: 10px;
+}
+footer span a i{
+    color: var(--green);
+    font-size: 15pt;
+    transition: 0.2s ease;
+}
+footer span a:hover i {
+    color: var(--pink);
+    font-size: 18pt;
+}

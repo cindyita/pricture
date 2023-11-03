@@ -6,6 +6,13 @@ class Router
     private $_page = array();
     private $_action = array();
 
+    private $error404 = null;
+
+    public function __construct($error404Page) 
+    {
+        $this->error404 = $error404Page;
+    }
+
     public function add($page, $action = null) 
     {
         $this->_page[] = '/' . trim($page, '/');
@@ -19,6 +26,7 @@ class Router
     public function run() 
     {
         $pageGet = isset($_GET['page']) ? '/' . $_GET['page'] : '/';
+        $matched = false;
         
         foreach ($this->_page as $key => $value) 
         {
@@ -26,7 +34,13 @@ class Router
             {
                 $action = $this->_action[$key];
                 $this->runAction($action);
+                $matched = true;
             }
+        }
+
+        if (!$matched && $this->error404 != null) 
+        {
+            $this->runAction($this->error404);
         }
     }
 

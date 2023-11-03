@@ -11,15 +11,47 @@
     <title>Pricture | Your pripara photo space</title>
     <link rel="shortcut icon" href="./assets/img/system/favicon.png" type="image/PNG">
 
+    <script src="./assets/library/jquery/jquery-3.7.0.min.js"></script>
+
+     <!-- Dark/light theme -->
+    <script>
+        var themeDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+        if (localStorage.getItem("theme") === 'dark') {
+            themeDark = true;
+        } else if (localStorage.getItem("theme") === 'light') {
+            themeDark = false;
+        }
+        // DARK/LIGHT THEME
+        function toggleMode() {
+            if (themeDark) {
+                localStorage.setItem('theme', 'dark');
+                document.documentElement.setAttribute("data-theme", "dark");
+                $("#imglogo").attr("src", "./assets/img/system/logo_dark.png");
+                themeDark = false;
+            } else {
+                localStorage.setItem('theme', 'light');
+                document.documentElement.setAttribute("data-theme", "light");
+                $("#imglogo").attr("src", "./assets/img/system/logo.png");
+                themeDark = true;
+            }
+        }
+        toggleMode();
+    </script>
+
     <!-------------required------------>
 
     <link href="./assets/library/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="./assets/library/fontawesome/css/brands.min.css" rel="stylesheet">
     <link href="./assets/library/fontawesome/css/solid.min.css" rel="stylesheet">
 
-    <script src="./assets/library/jquery/jquery-3.7.0.min.js"></script>
-
     <link href="./assets/library/bootstrap5/bootstrap.min.css" rel="stylesheet">
+
+    <script src="./assets/library/momentjs/momentjs.js"></script>
+    <script src="./assets/library/momentjs/momentjs-timezone.js"></script>
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <!-------------/required------------>
 
@@ -37,3 +69,11 @@
     <!--------------------------------->
 </head>
 <body>
+
+<div class="page-overlay">
+    <div class="content">
+        <div role="status">
+            <div class="spinner-border"></div>
+        </div>
+    </div>
+</div>

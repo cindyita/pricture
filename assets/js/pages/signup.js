@@ -118,7 +118,7 @@ function confirmpass() {
 }
 
 function checkExist(inputv,element) {
-    var input = $(inputv);
+    var input = $('#'+inputv);
     var value = input.val();
 
     if (element == "email") {
