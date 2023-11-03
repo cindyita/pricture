@@ -134,6 +134,7 @@ function checkExist(inputv,element) {
             type: 'POST',
             data: {input:value},
             success: function (res) {
+                console.log(res);
                 if (res == 1) {
                     $(input).css('color', 'red');
                     $(input).css('border', '1px solid red');

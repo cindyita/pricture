@@ -164,9 +164,9 @@ function signup() {
 
             $register = $db->insert('SYS_USER', $insertData);
 
-            if($register){
-                sendEmailSMTP("contact@pricture.theblux.com", $data['name'], $data['email'], $data['username'],"Thank you for registering on Pricture", '', ["host"=>"ngx341.inmotionhosting.com","username"=>"contact@pricture.theblux.com","password"=>"-K7prPb9#8=}","port"=>"465"],["title"=>"Thank you for registering on the page","content"=>"We hope that your stay is to your liking, remember that we are still in the development and testing phase. Stop by from time to time to see what's new on the page and if you have any problems with your account, send us an email."]);
-            }
+            // if($register){
+            //     sendEmailSMTP("contact@pricture.theblux.com", $data['name'], $data['email'], $data['username'],"Thank you for registering on Pricture", '', ["host"=>"ngx341.inmotionhosting.com","username"=>"contact@pricture.theblux.com","password"=>"-K7prPb9#8=}","port"=>"465"],["title"=>"Thank you for registering on the page","content"=>"We hope that your stay is to your liking, remember that we are still in the development and testing phase. Stop by from time to time to see what's new on the page and if you have any problems with your account, send us an email."]);
+            // }
             echo json_encode($register);
             
         } else {

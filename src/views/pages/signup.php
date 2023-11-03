@@ -15,11 +15,11 @@
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" onblur="checkExist(this,'email')" required>
+                    <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" onblur="checkExist('email','email')" required>
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" onblur="checkExist(this,'username')" required>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" onblur="checkExist('username','username')" required>
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">Password</label>
