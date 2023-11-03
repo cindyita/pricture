@@ -154,12 +154,16 @@ function signup() {
 
         if($recaptcha->success == true){
 
+            date_default_timezone_set('UTC');
+
+
             $db = new QueryModel();
             $pass = md5($data['pass']);
             $insertData = [
                 'email' => $data['email'],
                 'username' => $data['username'],
-                'password' => $pass
+                'password' => $pass,
+                'timestamp_create'=>date('Y-m-d H:i:s')
             ];
 
             $register = $db->insert('SYS_USER', $insertData);
@@ -303,14 +307,15 @@ function newPost(){
 
         $img_post = uploadFile($_FILES['img'], $uploadDirectory, $fileName);
     }
-
+    date_default_timezone_set('UTC');
 
     try {
         $insertData = [
             'id_user' => $id,
             'img' => $id.'/'.$fileName,
             'extract' => $data['text'],
-            'id_category' => $category
+            'id_category' => $category,
+            'timestamp_create'=>date('Y-m-d H:i:s')
         ];
 
         $register = $db->insert('REG_POST', $insertData);

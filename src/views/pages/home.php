@@ -12,7 +12,7 @@
                         <div class="user-post">
                             <img src="./assets/img/<?php echo $value['img_profile'] ? 'user/img-profile/'.$value['img_profile'] : 'system/defaultprofile.jpg'; ?>" alt="image profile">
                         </div>
-                        <span class="user-name"><a href="user?id=1"><?php echo $value['username']; ?></a></span>
+                        <span class="user-name"><a href="user?id=<?php echo $value['id_user']; ?>"><?php echo $value['username']; ?></a></span>
                     </div>
                     <div class="stats">
                         <a href="post?id=<?php echo $value['id']; ?>">

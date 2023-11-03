@@ -2,7 +2,7 @@
 
     <div class="login pink-box">
         <div class="logo">
-            <img src="./assets/img/system/logo.png" alt="logo">
+            <a href="home"><img src="./assets/img/system/logo.png" alt="logo"></a>
         </div>
         <div>
             <h4>Sign up</h4>
