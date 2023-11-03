@@ -198,6 +198,7 @@ function saveprofile(){
         }
 
         $newimgprofile = uploadFile($_FILES['img-profile'], $uploadDirectory, $profileFileName);
+        $_SESSION['userdata']['img_profile'] = $profileFileName;
     }
 
     // Custom brand
@@ -237,6 +238,7 @@ function saveprofile(){
         $db->delete('REG_CUSTOM_BRANDS', 'id_user = ' . $_SESSION['userdata']['id']);
         $custom_brand = null;
     }
+    
 
     // Update data
     $updateData = [

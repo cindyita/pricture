@@ -29,7 +29,7 @@
                         </div>
                         <div>
                             <strong>Birthday</strong>
-                            <p id="view-birthday"><?php echo $user['birthday']; ?></p>
+                            <p id="view-birthday" class="dateFormat"><?php echo $user['birthday']; ?></p>
                         </div>
                         <div>
                             <strong>Idol type</strong>

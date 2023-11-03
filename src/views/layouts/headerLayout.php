@@ -82,6 +82,10 @@
     </div>
 </div>
 
-<div class="superior-banner">
-    <span>This is a development version and many features are still missing. Please, if you find a bug or have a suggestion, <a href="contact">write to us.</a></span>
+<div id="superiorBanner">
+    <div class="superior-banner d-flex justify-content-between">
+        <span></span>
+        <span>This is a development version and many features are still missing. Please, if you find a bug or have a suggestion, <a href="contact">write to us.</a></span>
+        <a class="cursor-pointer" id="closeBanner"><i class="fa-solid fa-circle-xmark text-danger"></i></a>
+    </div>
 </div>

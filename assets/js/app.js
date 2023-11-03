@@ -3,6 +3,15 @@ $(window).on("load", function () {
     changeLogoTheme();
     changeToRelativeTime('relativedate');
     dateFormat('dateFormat');
+
+    if (localStorage.getItem('notice-betaweb') !== 'true') {
+        $('#superiorBanner').show();
+    }
+    $('#closeBanner').click(function () {
+        $('#superiorBanner').hide();
+        localStorage.setItem('notice-betaweb', 'true');
+    });
+
 });
 
 function changeToRelativeTime(nameclass) {
